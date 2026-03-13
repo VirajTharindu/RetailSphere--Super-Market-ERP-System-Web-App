@@ -1,0 +1,41 @@
+{
+  "name": "super-market-erp-backend",
+  "version": "1.0.0",
+  "description": "A real world ERP system for a Super Market",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "lint": "eslint . --ext .js",
+    "format": "prettier --write \"**/*.js\"",
+    "db:create-migration": "npx sequelize-cli migration:generate --name",
+    "db:migrate:test": "npx sequelize-cli db:migrate --env test",
+    "db:migrate:prod": "npx sequelize-cli db:migrate --env production",
+    "db:undo:test": "npx sequelize-cli db:migrate:undo --env test",
+    "db:undo:prod": "npx sequelize-cli db:migrate:undo --env production",
+    "db:undo:all:test": "npx sequelize-cli db:migrate:undo:all --env test",
+    "db:undo:all:prod": "npx sequelize-cli db:migrate:undo:all --env production"
+  },
+  "author": "Viraj Tharindu",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.2.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "mysql2": "^3.16.2",
+    "sequelize": "^6.37.7",
+    "sqlite3": "^5.1.7",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11",
+    "sequelize-cli": "^6.6.5"
+  }
+}
