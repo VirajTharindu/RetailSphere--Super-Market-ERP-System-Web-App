@@ -1,1 +1,0 @@
-RetailSphere 🧩💎 - An enterprise-grade Full-stack ERP for modern retail. Featuring type-safe CSM architecture, automated inventory intelligence & RBAC security. 🚀📦

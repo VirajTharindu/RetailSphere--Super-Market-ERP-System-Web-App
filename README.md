@@ -38,7 +38,7 @@ The following resources demonstrate the system's behavior:
 
 - [📹 Product Video](#-product-video)
 - [📸 Screenshots of Key Features](#-screenshots)
-- [⚙️ Architecture Overview](docs/system_architecture.md)
+- [⚙️ Architecture Overview](#️-architecture-overview)
 - [🧠 Engineering Lessons](#-engineering-lessons)
 - [🔧 Design Decisions](#-key-design-decisions)
 - [🗺️ Roadmap](#️-roadmap)
