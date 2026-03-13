@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+:root {
+  --erp-primary: #0d9488;
+  --erp-primary-dark: #0f766e;
+  --erp-surface: #f8fafc;
+  --erp-card: #ffffff;
+  --erp-border: #e2e8f0;
+  --erp-text: #1e293b;
+  --erp-text-muted: #64748b;
+  --erp-sidebar: #0f172a;
+  --erp-sidebar-hover: #1e293b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "DM Sans", system-ui, -apple-system, sans-serif;
+  background: var(--erp-surface);
+  color: var(--erp-text);
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+input, select, textarea, button {
+  font-family: inherit;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid var(--erp-primary);
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  @apply bg-teal-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-teal-700 transition;
+}
+
+.btn-secondary {
+  @apply bg-slate-200 text-slate-800 px-4 py-2 rounded-lg font-medium hover:bg-slate-300 transition;
+}
+
+.btn-danger {
+  @apply bg-red-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-700 transition;
+}
+
+.table-container {
+  @apply overflow-x-auto rounded-lg border border-slate-200 bg-white;
+}
+
+.table-container table {
+  @apply w-full text-left;
+}
+
+.table-container th {
+  @apply bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700 border-b border-slate-200;
+}
+
+.table-container td {
+  @apply px-4 py-3 text-sm border-b border-slate-100;
+}
+
+.table-container tbody tr:hover {
+  @apply bg-slate-50/50;
+}
+
+.card {
+  @apply bg-white rounded-xl border border-slate-200 shadow-sm p-6;
+}
+
+.form-group {
+  @apply flex flex-col gap-1;
+}
+
+.form-group label {
+  @apply text-sm font-medium text-slate-700;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  @apply border border-slate-300 rounded-lg px-3 py-2 text-sm;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  @apply border-teal-500 ring-1 ring-teal-500/20;
+}

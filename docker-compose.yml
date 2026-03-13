@@ -1,0 +1,18 @@
+services:
+  backend:
+    build:
+      context: "./backend"
+    ports:
+      - "3000:3000"
+    environment:
+      - APP_MODE=PROD
+    volumes:
+      - ./backend/database.sqlite:/app/database.sqlite
+
+  frontend:
+    build:
+      context: "./frontend"
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend

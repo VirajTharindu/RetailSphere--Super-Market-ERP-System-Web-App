@@ -1,0 +1,50 @@
+# Common Node.js / React / Express Ignore Patterns
+
+# Dependencies
+node_modules/
+**/node_modules/
+.pnp
+.pnp.js
+
+# Environment Variables & Secrets
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+**/.env
+**/.env.*
+
+# Local Databases & Logs
+*.db
+*.sqlite
+database.sqlite
+backend/database.sqlite
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+**/*.log
+
+# Build Artifacts
+dist/
+build/
+**/dist/
+**/build/
+.next/
+out/
+.vercel
+tsconfig.tsbuildinfo
+
+# Editor & OS Files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.suo
+*.sln
+*.sw?
+
+# Temporary Files / Scripts
+backend/seed-temp.ts
+rename_screenshots.py
+**/tmp/
