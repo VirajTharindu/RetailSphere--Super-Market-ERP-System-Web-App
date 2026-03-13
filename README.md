@@ -66,25 +66,35 @@ The following gallery showcases the RetailSphere interface, categorized by syste
 ### 🛡️ Administrator View
 *Managing the core retail infrastructure, users, and procurement.*
 
-| 01 - Dashboard Overview | 02 - Sales & Point of Sale |
-|:---:|:---:|
-| ![Dashboard](docs/screenshots/01%20-%20Admin%20-%20Dashboard.png) | ![Sales](docs/screenshots/02%20-%20Admin%20-%20Sales%20&%20Point%20of%20Sale.png) |
+#### 01 - Dashboard Overview
+![Dashboard](docs/screenshots/01%20-%20Admin%20-%20Dashboard.png)
 
-| 03 - Category Management | 04 - Product Management |
-|:---:|:---:|
-| ![Categories](docs/screenshots/03%20-%20Admin%20-%20Category%20Management.png) | ![Products](docs/screenshots/04%20-%20Admin%20-%20Product%20Management.png) |
+#### 02 - Sales & Point of Sale
+![Sales](docs/screenshots/02%20-%20Admin%20-%20Sales%20&%20Point%20of%20Sale.png)
 
-| 05 - Customer Management | 06 - Supplier Management |
-|:---:|:---:|
-| ![Customers](docs/screenshots/05%20-%20Admin%20-%20Customer%20Management.png) | ![Suppliers](docs/screenshots/06%20-%20Admin%20-%20Supplier%20Management.png) |
+#### 03 - Category Management
+![Categories](docs/screenshots/03%20-%20Admin%20-%20Category%20Management.png)
 
-| 07 - Stock & Batch Management | 08 - Purchase Order Tracking |
-|:---:|:---:|
-| ![Stock](docs/screenshots/07%20-%20Admin%20-%20Stock%20&%20Batch%20Management.png) | ![PO Details](docs/screenshots/08%20-%20Admin%20-%20Purchase%20Order%20Tracking.png) |
+#### 04 - Product Management
+![Products](docs/screenshots/04%20-%20Admin%20-%20Product%20Management.png)
 
-| 09 - User Control Panel | 10 - Profile Settings |
-|:---:|:---:|
-| ![Users](docs/screenshots/09%20-%20Admin%20-%20User%20Control%20Panel.png) | ![Profile](docs/screenshots/10%20-%20Admin%20-%20Profile%20Settings.png) |
+#### 05 - Customer Management
+![Customers](docs/screenshots/05%20-%20Admin%20-%20Customer%20Management.png)
+
+#### 06 - Supplier Management
+![Suppliers](docs/screenshots/06%20-%20Admin%20-%20Supplier%20Management.png)
+
+#### 07 - Stock & Batch Management
+![Stock](docs/screenshots/07%20-%20Admin%20-%20Stock%20&%20Batch%20Management.png)
+
+#### 08 - Purchase Order Tracking
+![PO Details](docs/screenshots/08%20-%20Admin%20-%20Purchase%20Order%20Tracking.png)
+
+#### 09 - User Control Panel
+![Users](docs/screenshots/09%20-%20Admin%20-%20User%20Control%20Panel.png)
+
+#### 10 - Profile Settings
+![Profile](docs/screenshots/10%20-%20Admin%20-%20Profile%20Settings.png)
 
 ---
 
