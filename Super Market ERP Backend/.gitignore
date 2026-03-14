@@ -1,2 +1,23 @@
 node_modules/
+dist/
 .env
+*.sqlite
+*.log
+*.txt
+*.cjs
+*.js
+!app.ts
+!models/
+!routes/
+!controllers/
+!services/
+!config/
+!middleware/
+!utils/
+!validators/
+!types/
+!constants/
+!migrations/
+!package.json
+!tsconfig.json
+!verify_api.js # Wait, actually remove these
