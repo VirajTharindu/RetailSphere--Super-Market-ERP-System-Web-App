@@ -1,0 +1,26 @@
+controllers/porderDetail.controller.ts(68,37): error TS1005: ',' expected.
+services/analytics.service.ts(120,27): error TS1005: ':' expected.
+services/analytics.service.ts(120,35): error TS1005: ',' expected.
+services/analytics.service.ts(120,48): error TS1005: ';' expected.
+services/analytics.service.ts(121,7): error TS1434: Unexpected keyword or identifier.
+services/analytics.service.ts(121,25): error TS1005: ':' expected.
+services/analytics.service.ts(121,44): error TS1005: ';' expected.
+services/analytics.service.ts(122,7): error TS1434: Unexpected keyword or identifier.
+services/analytics.service.ts(122,13): error TS1434: Unexpected keyword or identifier.
+services/analytics.service.ts(123,7): error TS1434: Unexpected keyword or identifier.
+services/analytics.service.ts(123,13): error TS1434: Unexpected keyword or identifier.
+services/analytics.service.ts(123,16): error TS1434: Unexpected keyword or identifier.
+services/analytics.service.ts(124,19): error TS1443: Module declaration names may only use ' or " quoted strings.
+services/analytics.service.ts(259,10): error TS1434: Unexpected keyword or identifier.
+services/analytics.service.ts(259,32): error TS1434: Unexpected keyword or identifier.
+services/analytics.service.ts(284,12): error TS1005: ';' expected.
+services/analytics.service.ts(284,41): error TS1005: ',' expected.
+services/analytics.service.ts(284,42): error TS1005: ',' expected.
+services/analytics.service.ts(284,49): error TS1005: ',' expected.
+services/analytics.service.ts(308,1): error TS1160: Unterminated template literal.
+utils/date.utils.ts(3,40): error TS1005: ',' expected.
+validators/analytics.validator.ts(6,55): error TS1005: ',' expected.
+validators/analytics.validator.ts(13,43): error TS1005: ',' expected.
+validators/analytics.validator.ts(19,45): error TS1005: ',' expected.
+validators/analytics.validator.ts(27,56): error TS1005: ',' expected.
+validators/analytics.validator.ts(34,43): error TS1005: ',' expected.

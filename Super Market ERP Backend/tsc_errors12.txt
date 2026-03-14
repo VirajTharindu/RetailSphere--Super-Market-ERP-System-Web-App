@@ -1,0 +1,28 @@
+controllers/auth.controller.ts(59,19): error TS18047: 'result' is possibly 'null'.
+controllers/auth.controller.ts(59,43): error TS18047: 'result' is possibly 'null'.
+controllers/auth.controller.ts(60,19): error TS18047: 'result' is possibly 'null'.
+controllers/auth.controller.ts(60,43): error TS18047: 'result' is possibly 'null'.
+controllers/auth.controller.ts(61,19): error TS18047: 'result' is possibly 'null'.
+middleware/inputValidation.ts(26,43): error TS2698: Spread types may only be created from object types.
+services/analytics.service.ts(11,6): error TS2304: Cannot find name 'result'.
+services/analytics.service.ts(12,16): error TS2304: Cannot find name 'result'.
+services/analytics.service.ts(16,8): error TS2304: Cannot find name 'result'.
+services/analytics.service.ts(127,28): error TS2339: Property 'from' does not exist on type '{ limit: any; }'.
+services/analytics.service.ts(131,20): error TS2339: Property 'to' does not exist on type '{ limit: any; }'.
+services/analytics.service.ts(136,26): error TS2339: Property 'QueryTypes' does not exist on type 'Sequelize'.
+services/analytics.service.ts(194,37): error TS7006: Parameter 'c' implicitly has an 'any' type.
+services/auth.service.ts(20,9): error TS7022: 'token' implicitly has type 'any' because it does not have a type annotation and is referenced directly or indirectly in its own initializer.
+services/auth.service.ts(23,18): error TS2448: Block-scoped variable 'token' used before its declaration.
+services/auth.service.ts(52,17): error TS2339: Property 'username' does not exist on type '{}'.
+services/auth.service.ts(57,17): error TS2339: Property 'fullName' does not exist on type '{}'.
+services/auth.service.ts(61,11): error TS7022: 'isSamePassword' implicitly has type 'any' because it does not have a type annotation and is referenced directly or indirectly in its own initializer.
+services/auth.service.ts(63,8): error TS2448: Block-scoped variable 'isSamePassword' used before its declaration.
+services/auth.service.ts(69,17): error TS2339: Property 'password' does not exist on type '{}'.
+services/category.service.ts(12,20): error TS2304: Cannot find name 'result'.
+services/category.service.ts(13,19): error TS2304: Cannot find name 'result'.
+services/sales.service.ts(220,16): error TS2552: Cannot find name 'stockBatch'. Did you mean 'StockBatch'?
+services/sales.service.ts(284,16): error TS2552: Cannot find name 'stockBatch'. Did you mean 'StockBatch'?
+services/sales.service.ts(342,7): error TS7053: Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'.
+services/sales.service.ts(342,11): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ paymentMethod: string; status: string; customerId: string; }'.
+  No index signature with a parameter of type 'string' was found on type '{ paymentMethod: string; status: string; customerId: string; }'.
+validators/stockbatch.validator.ts(15,9): error TS2353: Object literal may only specify known properties, and 'errorMap' does not exist in type '{ error?: string | $ZodErrorMap<$ZodIssueInvalidType<unknown>> | undefined; message?: string | undefined; }'.

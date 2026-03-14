@@ -1,0 +1,1 @@
+app.ts(8,30): error TS2307: Cannot find module 'express-rate-limit' or its corresponding type declarations.

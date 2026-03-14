@@ -1,0 +1,16 @@
+controllers/analytics.controller.ts(2,3): error TS2614: Module '"../services/analytics.service.js"' has no exported member 'getOverview'. Did you mean to use 'import getOverview from "../services/analytics.service.js"' instead?
+controllers/analytics.controller.ts(3,3): error TS2614: Module '"../services/analytics.service.js"' has no exported member 'getSalesTrend'. Did you mean to use 'import getSalesTrend from "../services/analytics.service.js"' instead?
+controllers/analytics.controller.ts(5,3): error TS2614: Module '"../services/analytics.service.js"' has no exported member 'getLowStock'. Did you mean to use 'import getLowStock from "../services/analytics.service.js"' instead?
+controllers/analytics.controller.ts(6,3): error TS2614: Module '"../services/analytics.service.js"' has no exported member 'getInventoryValuation'. Did you mean to use 'import getInventoryValuation from "../services/analytics.service.js"' instead?
+controllers/analytics.controller.ts(7,3): error TS2614: Module '"../services/analytics.service.js"' has no exported member 'getTopCustomers'. Did you mean to use 'import getTopCustomers from "../services/analytics.service.js"' instead?
+controllers/analytics.controller.ts(8,3): error TS2614: Module '"../services/analytics.service.js"' has no exported member 'getExpiryForecast'. Did you mean to use 'import getExpiryForecast from "../services/analytics.service.js"' instead?
+controllers/analytics.controller.ts(38,39): error TS2345: Argument of type '{ limit: number; from: any; to: any; }' is not assignable to parameter of type 'number'.
+controllers/auth.controller.ts(6,3): error TS2614: Module '"../services/auth.service.js"' has no exported member 'createUser'. Did you mean to use 'import createUser from "../services/auth.service.js"' instead?
+controllers/auth.controller.ts(7,3): error TS2614: Module '"../services/auth.service.js"' has no exported member 'listAllUsers'. Did you mean to use 'import listAllUsers from "../services/auth.service.js"' instead?
+controllers/auth.controller.ts(8,3): error TS2614: Module '"../services/auth.service.js"' has no exported member 'getUserByIdService'. Did you mean to use 'import getUserByIdService from "../services/auth.service.js"' instead?
+controllers/auth.controller.ts(9,3): error TS2614: Module '"../services/auth.service.js"' has no exported member 'deleteUserByIdService'. Did you mean to use 'import deleteUserByIdService from "../services/auth.service.js"' instead?
+routes/stockbatch.routes.ts(20,3): error TS2724: '"../validators/stockbatch.validator.js"' has no exported member named 'stockBatchCreateSchema'. Did you mean 'stockBatchSchema'?
+routes/stockbatch.routes.ts(21,3): error TS2724: '"../validators/stockbatch.validator.js"' has no exported member named 'stockBatchUpdateSchema'. Did you mean 'stockBatchSchema'?
+routes/stockbatch.routes.ts(22,3): error TS2305: Module '"../validators/stockbatch.validator.js"' has no exported member 'idParamSchema'.
+routes/stockbatch.routes.ts(23,3): error TS2724: '"../validators/stockbatch.validator.js"' has no exported member named 'stockbatchReduceSchema'. Did you mean 'stockBatchSchema'?
+routes/stockbatch.routes.ts(24,3): error TS2305: Module '"../validators/stockbatch.validator.js"' has no exported member 'productIdParamSchema'.

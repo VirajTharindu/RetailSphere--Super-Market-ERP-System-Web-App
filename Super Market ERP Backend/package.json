@@ -1,15 +1,14 @@
 {
-  "name": "super-market-erp-backend",
+  "name": "retailsphere-backend",
   "version": "1.0.0",
-  "description": "A real world ERP system for a Super Market",
+  "description": "RetailSphere - Enterprise Retail Management System Backend API",
   "type": "module",
-  "main": "app.js",
+  "main": "app.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
-    "dev": "nodemon app.js",
-    "lint": "eslint . --ext .js",
-    "format": "prettier --write \"**/*.js\"",
+    "dev": "nodemon --exec \"node --loader ts-node/esm\" app.ts",
+    "start": "node --loader ts-node/esm app.ts",
+    "build": "tsc",
+    "lint": "tsc --noEmit",
     "db:create-migration": "npx sequelize-cli migration:generate --name",
     "db:migrate:test": "npx sequelize-cli db:migrate --env test",
     "db:migrate:prod": "npx sequelize-cli db:migrate --env production",
@@ -26,7 +25,7 @@
     "cors": "^2.8.6",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
-    "express-rate-limit": "^8.2.1",
+    "express-rate-limit": "^8.3.1",
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.3",
     "mysql2": "^3.16.2",
@@ -35,7 +34,15 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/cookie-parser": "^1.4.8",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/node": "^22.15.0",
     "nodemon": "^3.1.11",
-    "sequelize-cli": "^6.6.5"
+    "sequelize-cli": "^6.6.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   }
 }
