@@ -27,11 +27,11 @@ export async function createCustomerController(req: any, res: any) {
     res.status(201).json({
       success: true,
       customer: {
-        id: customer.CustomerID,
-        firstName: customer.FirstName,
-        lastName: customer.LastName,
-        phone: customer.Phone,
-        loyaltyPoints: customer.LoyaltyPoints,
+        CustomerID: customer.CustomerID,
+        FirstName: customer.FirstName,
+        LastName: customer.LastName,
+        Phone: customer.Phone,
+        LoyaltyPoints: customer.LoyaltyPoints,
       },
       message: `Customer created successfully with ID ${customer.CustomerID}`,
     });

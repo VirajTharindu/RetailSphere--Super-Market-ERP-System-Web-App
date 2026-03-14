@@ -1,2 +1,0 @@
-services/inventory.service.ts(300,10): error TS1005: ',' expected.
-services/inventory.service.ts(301,7): error TS1005: ',' expected.

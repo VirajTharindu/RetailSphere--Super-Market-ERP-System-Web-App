@@ -19,6 +19,7 @@ export async function createStockBatchController(req: any, res: any) {
     res.status(201).json({
       success: true,
       message: `Stock batch created successfully with stock batch ID ${batch.BatchID} `,
+      stockBatch: batch, // FE uses stockBatch key in some places
       batch,
     });
   } catch (err: any) {
@@ -46,7 +47,11 @@ export async function getStockBatchByIdController(req: any, res: any) {
   try {
     const { id } = req.params;
     const batch = await InventoryService.getBatchById(id);
-    res.json({ success: true, batch });
+    res.json({ 
+      success: true, 
+      stockBatch: batch, // FE expects stockBatch
+      batch 
+    });
   } catch (err: any) {
     res.status(404).json({ success: false, error: err.message });
   }
@@ -74,12 +79,12 @@ export async function getTotalStockController(req: any, res: any) {
 export async function getSellableBatchesController(req: any, res: any) {
   try {
     const { productId } = req.params;
-    const sellableBatches =
-      await InventoryService.getSellableBatches(productId);
+    const batches = await InventoryService.getSellableBatches(productId);
     res.status(200).json({
       success: true,
-      message: `All ${sellableBatches.length} sellable  batches fetched successfully `,
-      sellableBatches,
+      message: `All ${batches.length} sellable batches fetched successfully `,
+      batches, // FE expects batches
+      sellableBatches: batches,
     });
   } catch (err: any) {
     res.status(400).json({ success: false, error: err.message });
@@ -88,7 +93,7 @@ export async function getSellableBatchesController(req: any, res: any) {
 
 /* =========================================================
    UPDATE (METADATA ONLY)
-========================================================= */
+======================================================== */
 export async function updateStockBatchController(req: any, res: any) {
   try {
     const { id } = req.params;
@@ -96,6 +101,7 @@ export async function updateStockBatchController(req: any, res: any) {
     res.status(200).json({
       success: true,
       message: `Stock batch updated`,
+      stockBatch: updatedBatch, // FE expects stockBatch
       batch: updatedBatch,
     });
   } catch (err: any) {
@@ -125,19 +131,16 @@ export async function deleteStockBatchController(req: any, res: any) {
 ========================================================= */
 export async function reduceStockController(req: any, res: any) {
   try {
-    // :id = StockBatchID
     const { id } = req.params;
-
-    // quantity belongs in body
     const { quantity } = req.body;
 
     const batch = await InventoryService.reduceStock({ batchId: id, quantity });
     res.status(200).json({
       success: true,
-      message: `${quantity} amount of stock reduced successfully with stock batch ID ${id}. now the stock batch is ${(batch as any)["QuantityOnHand"]}`,
+      message: `${quantity} amount of stock reduced successfully`,
       batch,
       reducedQuantity: quantity,
-      remainedQuantity: (batch as any)["QuantityOnHand"],
+      remainedQuantity: (batch as any).QuantityOnHand,
     });
   } catch (err: any) {
     res.status(400).json({ success: false, error: err.message });
@@ -150,7 +153,6 @@ export async function reduceStockController(req: any, res: any) {
 export async function checkReorderController(req: any, res: any) {
   try {
     const { productId } = req.params;
-
     const result = await InventoryService.checkReorder(productId);
 
     res.status(200).json({
@@ -158,10 +160,7 @@ export async function checkReorderController(req: any, res: any) {
       ...result,
     });
   } catch (err: any) {
-    res.status(400).json({
-      success: false,
-      error: err.message,
-    });
+    res.status(400).json({ success: false, error: err.message });
   }
 }
 
@@ -188,9 +187,9 @@ export async function issueStockByProductController(req: any, res: any) {
     });
     res.status(200).json({
       success: true,
-      message: `Stock quantity issued successfully with ID ${productId}. Issued quantity is ${quantity} from batch/es . Now the stock amount is ${(batches as any)["QuantityOnHand"]} from batch/es`,
+      message: `Stock quantity issued successfully`,
       quantityIssued: quantity,
-      remainedQuantity: (batches as any)["QuantityOnHand"],
+      remainedQuantity: (batches as any)?.[0]?.QuantityOnHand ?? 0,
       batches: batches,
     });
   } catch (err: any) {

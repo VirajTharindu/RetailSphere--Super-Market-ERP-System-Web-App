@@ -1,5 +1,0 @@
-services/analytics.service.ts(194,37): error TS7006: Parameter 'c' implicitly has an 'any' type.
-services/auth.service.ts(52,17): error TS2339: Property 'username' does not exist on type '{}'.
-services/auth.service.ts(57,17): error TS2339: Property 'fullName' does not exist on type '{}'.
-services/auth.service.ts(69,17): error TS2339: Property 'password' does not exist on type '{}'.
-validators/stockbatch.validator.ts(15,9): error TS2353: Object literal may only specify known properties, and 'errorMap' does not exist in type '{ error?: string | $ZodErrorMap<$ZodIssueInvalidType<unknown>> | undefined; message?: string | undefined; }'.

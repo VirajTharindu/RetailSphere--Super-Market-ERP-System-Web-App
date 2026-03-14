@@ -34,6 +34,7 @@ export const loginController = async (req: any, res: any) => {
     user: {
       id: result?.user?.UserID,
       username: result?.user?.Username,
+      fullName: result?.user?.FullName,
       role: result?.user?.UserRole,
     },
   });
@@ -44,7 +45,15 @@ export const getProfileController = async (req: any, res: any) => {
   if (!user) {
     return res.status(404).json({ success: false, message: "User not found" });
   }
-  res.status(200).json({ success: true, user });
+  res.status(200).json({ 
+    success: true, 
+    user: {
+      id: user.UserID,
+      username: user.Username,
+      fullName: user.FullName,
+      role: user.UserRole
+    } 
+  });
 };
 
 export const updateSelfProfileController = async (req: any, res: any) => {
@@ -128,7 +137,15 @@ export const registerUserController = async (req: any, res: any) => {
   }
 
   try {
-    const user = await createUser(req.body);
+    const { username, password, fullName, userRole } = req.body;
+    const userPayload = {
+      Username: username,
+      PasswordHash: password, // will be hashed by service
+      FullName: fullName,
+      UserRole: userRole,
+    };
+    
+    const user = await createUser({ ...userPayload, password }); // pass password for hashing
     res.status(201).json({
       success: true,
       message: `User ${user.UserID} created successfully.`,

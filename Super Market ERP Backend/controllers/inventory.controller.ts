@@ -98,23 +98,17 @@ export async function updateCategoryController(req: any, res: any) {
       });
     }
 
-    const updatePayload = {};
-    const updatedPart = {};
+    const updatePayload: any = {};
+    const updatedPart: any = {};
 
-    if (
-      CategoryName !== undefined &&
-      CategoryName !== (existingCategory as any)["CategoryName"]
-    ) {
-      (existingCategory as any)["CategoryName"] = CategoryName;
-      (existingCategory as any)["CategoryName"] = CategoryName;
+    if (CategoryName !== undefined && CategoryName !== (existingCategory as any).CategoryName) {
+      updatePayload.CategoryName = CategoryName;
+      updatedPart.CategoryName = CategoryName;
     }
 
-    if (
-      Description !== undefined &&
-      Description !== (existingCategory as any)["Description"]
-    ) {
-      (existingCategory as any)["Description"] = Description;
-      (existingCategory as any)["Description"] = Description;
+    if (Description !== undefined && Description !== (existingCategory as any).Description) {
+      updatePayload.Description = Description;
+      updatedPart.Description = Description;
     }
 
     if (Object.keys(updatePayload).length === 0) {
@@ -131,9 +125,8 @@ export async function updateCategoryController(req: any, res: any) {
       updated_part: updatedPart,
       category: {
         CategoryID: Number(id),
-        CategoryName:
-          (existingCategory as any)["CategoryName"] ?? (existingCategory as any)["CategoryName"],
-        Description: (existingCategory as any)["Description"] ?? (existingCategory as any)["Description"],
+        CategoryName: updatePayload.CategoryName ?? (existingCategory as any).CategoryName,
+        Description: updatePayload.Description ?? (existingCategory as any).Description,
       },
       message: `Category updated successfully with ID ${id}`,
     });

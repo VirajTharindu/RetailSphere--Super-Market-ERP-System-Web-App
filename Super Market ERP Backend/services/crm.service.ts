@@ -1,9 +1,9 @@
 import db from "../models/index.js";
-const {  Customer  } = db as any;
+const { Customer } = db as any;
 
 /**
  * ==========================================
- * CUSTOMER SERVICE METHODS
+ * CUSTOMER SERVICE METHODS (Enhanced with FE Mapping)
  * ==========================================
  */
 
@@ -17,7 +17,10 @@ export async function createCustomer({ fName, lName, phone }: any) {
 }
 
 export async function fetchAllCustomers() {
-  return Customer.findAll();
+  const customers = await Customer.findAll();
+  // Map back to FE format for consistency if needed, 
+  // but FE supports both Pascal and camelCase as seen in types/index.ts.
+  return customers;
 }
 
 export async function fetchCustomerById(id: any) {
@@ -25,14 +28,12 @@ export async function fetchCustomerById(id: any) {
 }
 
 export async function updateCustomerById(id: any, data: any) {
-  return Customer.update(
-    {
-      FirstName: data.fName,
-      LastName: data.lName,
-      Phone: data.phone,
-    },
-    { where: { CustomerID: id } },
-  );
+  const updateData: any = {};
+  if (data.fName) updateData.FirstName = data.fName;
+  if (data.lName) updateData.LastName = data.lName;
+  if (data.phone) updateData.Phone = data.phone;
+
+  return Customer.update(updateData, { where: { CustomerID: id } });
 }
 
 export async function deleteCustomerById(id: any) {
