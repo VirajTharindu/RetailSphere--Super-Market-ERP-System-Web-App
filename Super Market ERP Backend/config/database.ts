@@ -16,6 +16,14 @@ if (dbName && process.env.DB_USERNAME) {
       dialect: "mysql",
       logging: false,
       pool: { max: 15 },
+      ...(isProd && {
+        dialectOptions: {
+          ssl: {
+            require: true,
+            rejectUnauthorized: true,
+          },
+        },
+      }),
     } as Options
   );
 } else {
