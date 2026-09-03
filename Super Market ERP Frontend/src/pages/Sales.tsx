@@ -63,10 +63,6 @@ export default function Sales() {
       setMessage('Add at least one item')
       return
     }
-    if (!customerId) {
-      setMessage('Please select a customer. Add a "Walk-in" customer in Customers if needed.')
-      return
-    }
     setCreating(true)
     setMessage('')
     try {

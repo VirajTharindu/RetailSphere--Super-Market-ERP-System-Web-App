@@ -9,7 +9,7 @@ export interface LoginPayload {
 export interface LoginResponse {
   success: boolean
   token?: string
-  user?: { id: number; username: string; role: string }
+  user?: { id: number; username: string; role: string; fullName?: string }
   message?: string
 }
 
