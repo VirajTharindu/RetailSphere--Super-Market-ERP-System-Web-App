@@ -21,6 +21,7 @@ if (dbName && process.env.DB_USERNAME) {
           ssl: {
             require: true,
             rejectUnauthorized: true,
+            minVersion: "TLSv1.2",
           },
         },
       }),
