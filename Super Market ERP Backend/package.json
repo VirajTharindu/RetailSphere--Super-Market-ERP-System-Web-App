@@ -6,7 +6,7 @@
   "main": "app.ts",
   "scripts": {
     "dev": "nodemon --exec \"node --loader ts-node/esm\" app.ts",
-    "start": "node --loader ts-node/esm app.ts",
+    "start": "node dist/app.js",
     "build": "tsc",
     "lint": "tsc --noEmit",
     "db:create-migration": "npx sequelize-cli migration:generate --name",
