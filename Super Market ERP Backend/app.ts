@@ -2,6 +2,12 @@
  * OMNI-STORE ERP: APP ENTRY POINT
  **/
 import "dotenv/config"; // ← ADD THIS AT THE VERY TOP
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
+});
 import express, { json, Request, Response, NextFunction } from "express";
 import cors from "cors";
 import helmet from "helmet";
