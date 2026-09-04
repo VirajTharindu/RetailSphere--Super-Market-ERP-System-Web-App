@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [ main, master ]
 
+env:
+  RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+  RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID }}
+  VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
 jobs:
   backend-ci:
     runs-on: ubuntu-latest
@@ -17,24 +22,30 @@ jobs:
           node-version: '22'
           cache: 'npm'
           cache-dependency-path: './backend/package-lock.json'
-      
+
       - name: Install Dependencies
         run: |
           cd backend
-          npm install
-      
+          npm ci
+
       - name: Lint
         run: |
           cd backend
-          # Run lint if script exists, otherwise skip to build
           npm run lint || echo "Lint skipped"
-      
+
       - name: Build
         run: |
           cd backend
           npm run build
 
+      - name: Deploy to Render
+        run: |
+          curl -X POST "https://api.render.com/v1/services/${{ env.RENDER_SERVICE_ID }}/redeploy" \
+            -H "Authorization: Bearer ${{ env.RENDER_API_KEY }}" \
+            -H "Accept: application/json"
+
   frontend-ci:
+    needs: backend-ci
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -44,13 +55,21 @@ jobs:
           node-version: '22'
           cache: 'npm'
           cache-dependency-path: './frontend/package-lock.json'
-      
+
       - name: Install Dependencies
         run: |
           cd frontend
-          npm install
-      
+          npm ci
+
       - name: Build
         run: |
           cd frontend
           npm run build
+
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          npm i -g vercel
+          cd frontend
+          vercel --prod --confirm --token $VERCEL_TOKEN

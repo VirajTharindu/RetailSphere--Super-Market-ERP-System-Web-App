@@ -147,7 +147,8 @@ Key upcoming features planned for RetailSphere:
 - ✅ **DONE** Fullstack TypeScript Migration — Complete rewrite of backend/frontend for type safety.
 - ✅ **DONE** Proactive Analytics Suite — Implementation of Inventory Valuation and Expiry forecasting.
 - ✅ **DONE** ERP System Architecture — Implementation of ERP System Architecture.
-- [/] **IN PROGRESS** Documentation Overhaul — Professionalizing README and architectural decision records.
+- ✅ **DONE** Documentation Overhaul — Professionalizing README and architectural decision records.
+- ✅ **DONE** CI Workflow Refactor – Duplicate definitions removed.
 - [ ] **NOT STARTED** Multi-store(branch) Support — Multi-store synchronization simulation.
 - [ ] **NOT STARTED** Thermal Printing — Native driver support for thermal barcode and receipt printers.
 
