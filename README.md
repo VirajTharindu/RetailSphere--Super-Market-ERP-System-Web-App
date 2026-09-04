@@ -9,7 +9,7 @@
   <img src="https://img.shields.io/badge/License-Private%20%26%20Portfolio-E11D48?style=for-the-badge&logo=security&logoColor=white" alt="License" />
 </p>
 
-# 🧩 RetailSphere --
+# 🧩 RetailSphere ---
 
 > **Seamlessly Unifying Retail, Inventory, and Intelligence.**
 
