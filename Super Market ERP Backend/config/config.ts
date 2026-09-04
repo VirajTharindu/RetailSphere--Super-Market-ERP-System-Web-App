@@ -24,6 +24,7 @@ const config: Record<string, Options> = {
       ssl: {
         require: true,
         rejectUnauthorized: true,
+        minVersion: "TLSv1.2",
       },
     },
   },
