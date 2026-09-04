@@ -20,40 +20,50 @@ export const healthCheck = (req: any, res: any) => {
 };
 
 export const loginController = async (req: any, res: any) => {
-  const result = await loginUser(req.body);
-  if (!result) {
-    return res.status(401).json({
-      success: false,
-      message: "Invalid username or password",
-    });
-  }
+  try {
+    const result = await loginUser(req.body);
+    if (!result) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid username or password",
+      });
+    }
 
-  res.status(200).json({
-    success: true,
-    token: result?.token,
-    user: {
-      id: result?.user?.UserID,
-      username: result?.user?.Username,
-      fullName: result?.user?.FullName,
-      role: result?.user?.UserRole,
-    },
-  });
+    res.status(200).json({
+      success: true,
+      token: result?.token,
+      user: {
+        id: result?.user?.UserID,
+        username: result?.user?.Username,
+        fullName: result?.user?.FullName,
+        role: result?.user?.UserRole,
+      },
+    });
+  } catch (err: any) {
+    console.error("❌ Login error:", err);
+    res.status(500).json({ success: false, message: "Login failed", error: err.message });
+  }
 };
 
 export const getProfileController = async (req: any, res: any) => {
-  const user = await getSelfProfile(req.user.id);
-  if (!user) {
-    return res.status(404).json({ success: false, message: "User not found" });
+  try {
+    const user = await getSelfProfile(req.user.id);
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+    res.status(200).json({
+      success: true,
+      user: {
+        id: user.UserID,
+        username: user.Username,
+        fullName: user.FullName,
+        role: user.UserRole
+      }
+    });
+  } catch (err: any) {
+    console.error("❌ Get profile error:", err);
+    res.status(500).json({ success: false, message: "Failed to get profile", error: err.message });
   }
-  res.status(200).json({ 
-    success: true, 
-    user: {
-      id: user.UserID,
-      username: user.Username,
-      fullName: user.FullName,
-      role: user.UserRole
-    } 
-  });
 };
 
 export const updateSelfProfileController = async (req: any, res: any) => {
@@ -161,19 +171,29 @@ export const registerUserController = async (req: any, res: any) => {
 };
 
 export const listUsersController = async (req: any, res: any) => {
-  const users = await listAllUsers();
-  res.status(200).json({
-    success: true,
-    message: `Retrieved ${users.length} users`,
-    users,
-  });
+  try {
+    const users = await listAllUsers();
+    res.status(200).json({
+      success: true,
+      message: `Retrieved ${users.length} users`,
+      users,
+    });
+  } catch (err: any) {
+    console.error("❌ List users error:", err);
+    res.status(500).json({ success: false, message: "Failed to list users", error: err.message });
+  }
 };
 
 export const getUserByIdController = async (req: any, res: any) => {
-  const user = await getUserByIdService(req.params.id);
-  if (!user)
-    return res.status(404).json({ success: false, message: "User not found" });
-  res.status(200).json({ success: true, user });
+  try {
+    const user = await getUserByIdService(req.params.id);
+    if (!user)
+      return res.status(404).json({ success: false, message: "User not found" });
+    res.status(200).json({ success: true, user });
+  } catch (err: any) {
+    console.error("❌ Get user error:", err);
+    res.status(500).json({ success: false, message: "Failed to get user", error: err.message });
+  }
 };
 
 export const deleteUserController = async (req: any, res: any) => {
