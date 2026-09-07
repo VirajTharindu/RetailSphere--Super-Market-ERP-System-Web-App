@@ -72,20 +72,52 @@ export async function createPO(data: any) {
 
 export async function updatePO(id: any, data: any) {
   const po = await (PurchaseOrder as any).findByPk(id);
-  if (!po) return null;
-
-  const updatedPart: any = {};
-  if (data.SupplierID !== undefined && data.SupplierID !== (po as any).SupplierID) {
-    (po as any).SupplierID = data.SupplierID;
-    updatedPart.SupplierID = data.SupplierID;
-  }
-  if (data.Status !== undefined && data.Status !== (po as any).Status) {
-    (po as any).Status = data.Status;
-    updatedPart.Status = data.Status;
-  }
-
+  if (!po) throw new Error("PurchaseOrder not found");
+  if (data.Status !== undefined) po.Status = data.Status;
+  if (data.SupplierID !== undefined) po.SupplierID = data.SupplierID;
   await po.save();
-  return { po, updatedPart };
+  return po;
+}
+
+export async function acceptPurchaseOrder(purchaseOrderId: any) {
+  const po = await (PurchaseOrder as any).findByPk(purchaseOrderId);
+  if (!po) throw new Error("PurchaseOrder not found");
+  po.Status = "Received";
+  await po.save();
+
+  // Also update all details of this PO
+  const details = await (POrderDetail as any).findAll({
+    where: { PO_ID: purchaseOrderId },
+  });
+  for (const pod of details) {
+    if (pod.Status === "Pending") {
+      pod.Status = "Received";
+      if (!pod.QuantityReceived || pod.QuantityReceived <= 0) {
+        pod.QuantityReceived = pod.QuantityRequested;
+      }
+      await pod.save();
+    }
+  }
+  return po;
+}
+
+export async function rejectPurchaseOrder(purchaseOrderId: any) {
+  const po = await (PurchaseOrder as any).findByPk(purchaseOrderId);
+  if (!po) throw new Error("PurchaseOrder not found");
+  po.Status = "Refused";
+  await po.save();
+
+  const details = await (POrderDetail as any).findAll({
+    where: { PO_ID: purchaseOrderId },
+  });
+  for (const pod of details) {
+    if (pod.Status === "Pending") {
+      pod.Status = "Refused";
+      pod.QuantityReceived = 0;
+      await pod.save();
+    }
+  }
+  return po;
 }
 
 export default {
@@ -98,4 +130,7 @@ export default {
   getPOById,
   createPO,
   updatePO,
+  acceptPurchaseOrder,
+  rejectPurchaseOrder,
 };
+

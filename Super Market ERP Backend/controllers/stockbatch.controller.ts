@@ -13,6 +13,19 @@ export function healthCheck(req: any, res: any) {
 /* =========================================================
    CREATE (STOCK IN)
 ========================================================= */
+export async function createDirectStockBatchController(req: any, res: any) {
+  try {
+    const batch = await InventoryService.createDirectBatch(req.body);
+    res.status(201).json({
+      success: true,
+      message: `Direct stock batch created successfully with ID ${batch.BatchID}`,
+      stockBatch: batch,
+      batch,
+    });
+  } catch (err: any) {
+    res.status(400).json({ success: false, error: err.message });
+  }
+}
 export async function createStockBatchController(req: any, res: any) {
   try {
     const batch = await InventoryService.createBatch(req.body);

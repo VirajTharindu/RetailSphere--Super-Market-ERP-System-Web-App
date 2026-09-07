@@ -2,6 +2,8 @@ import {
   getPODetailById,
   updatePODetail,
   listPODetails,
+  acceptPODetail,
+  refusePODetail,
 } from "../services/porderDetail.service.js";
 
 /**
@@ -40,7 +42,7 @@ export async function getPODetailController(req: any, res: any) {
  */
 export async function updatePODetailController(req: any, res: any) {
   try {
-    const { id } = req.params; // this is now PO_ID
+    const { id } = req.params;
     const data = req.body; // Expect JSON: { Status, QuantityReceived, CostPriceofPOD, ExpiryDate }
     const result = await updatePODetail(id, data);
 
@@ -49,6 +51,43 @@ export async function updatePODetailController(req: any, res: any) {
     res.status(400).json({ message: error.message });
   }
 }
+
+/**
+ * PUT /podetails-accept/:id
+ * Accept and mark a PO Detail as Received
+ */
+export async function acceptPODetailController(req: any, res: any) {
+  try {
+    const { id } = req.params;
+    const result = await acceptPODetail(id, req.body || {});
+    res.status(200).json({
+      success: true,
+      message: "PO Detail accepted and marked as Received",
+      podetail: result,
+    });
+  } catch (error: any) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+}
+
+/**
+ * PUT /podetails-refuse/:id
+ * Refuse a PO Detail
+ */
+export async function refusePODetailController(req: any, res: any) {
+  try {
+    const { id } = req.params;
+    const result = await refusePODetail(id);
+    res.status(200).json({
+      success: true,
+      message: "PO Detail marked as Refused",
+      podetail: result,
+    });
+  } catch (error: any) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+}
+
 
 /**
  * GET /podetails

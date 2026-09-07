@@ -33,7 +33,46 @@ export async function getPODetailById(id: number): Promise<{ success: boolean; p
 export async function updatePODetail(
   id: number,
   payload: UpdatePODetailPayload
-): Promise<{ success: boolean }> {
-  const { data } = await api.put<{ success: boolean }>(`/porderdetail/podetails-update/${id}`, payload)
+): Promise<{ success: boolean; podetail?: POrderDetail }> {
+  const { data } = await api.put<{ success: boolean; podetail?: POrderDetail }>(`/porderdetail/podetails-update/${id}`, payload)
   return data
 }
+
+export async function acceptPODetail(
+  id: number,
+  payload?: { QuantityReceived?: number; CostPriceofPOD?: number; ExpiryDate?: string | null }
+): Promise<{ success: boolean; message: string; podetail?: POrderDetail }> {
+  const { data } = await api.put<{ success: boolean; message: string; podetail?: POrderDetail }>(
+    `/porderdetail/podetails-accept/${id}`,
+    payload || {}
+  )
+  return data
+}
+
+export async function refusePODetail(
+  id: number
+): Promise<{ success: boolean; message: string; podetail?: POrderDetail }> {
+  const { data } = await api.put<{ success: boolean; message: string; podetail?: POrderDetail }>(
+    `/porderdetail/podetails-refuse/${id}`
+  )
+  return data
+}
+
+export async function acceptPurchaseOrder(
+  poId: number
+): Promise<{ success: boolean; message: string }> {
+  const { data } = await api.put<{ success: boolean; message: string }>(
+    `/procurement/purchaseorder-accept/${poId}`
+  )
+  return data
+}
+
+export async function refusePurchaseOrder(
+  poId: number
+): Promise<{ success: boolean; message: string }> {
+  const { data } = await api.put<{ success: boolean; message: string }>(
+    `/procurement/purchaseorder-refuse/${poId}`
+  )
+  return data
+}
+

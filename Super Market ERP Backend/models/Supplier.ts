@@ -4,13 +4,12 @@ export default (sequelize: Sequelize, DataTypes: typeof DT) => {
   const Supplier = sequelize.define(
     "Supplier",
     {
-      SupplierID: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
+      SupplierID: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
       SupplierName: { type: DataTypes.STRING(100), allowNull: false },
-      ContactNumber: { type: DataTypes.STRING(20), allowNull: false },
+      ContactPerson: { type: DataTypes.STRING(100), allowNull: false },
+      Email: { type: DataTypes.STRING(100), allowNull: false },
+      Phone: { type: DataTypes.STRING(20), allowNull: false },
+      Address: { type: DataTypes.STRING(200), allowNull: true },
     },
     {
       tableName: "tbl_Supplier",

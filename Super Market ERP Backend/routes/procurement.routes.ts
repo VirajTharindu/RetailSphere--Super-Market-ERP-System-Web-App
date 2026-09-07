@@ -7,6 +7,10 @@ import {
   createSupplierController,
   updateSupplierController,
   deleteSupplierController,
+  getAllPOsController,
+  getPOByIdController,
+  acceptPurchaseOrderController,
+  rejectPurchaseOrderController,
 } from "../controllers/procurement.controller.js";
 import rbacMiddleware from "../middleware/rbac.js";
 import authMiddleware from "../middleware/auth.js"; // Assuming standard auth exists
@@ -68,4 +72,42 @@ router.delete(
   deleteSupplierController,
 );
 
+/**
+ * ==========================================
+ * PURCHASE ORDER ROUTES
+ * ==========================================
+ */
+
+router.get(
+  "/purchaseorder-list",
+  authMiddleware,
+  rbacMiddleware(ROLES.Manager, ROLES.Admin),
+  getAllPOsController,
+);
+
+router.get(
+  "/purchaseorder-get/:id",
+  authMiddleware,
+  rbacMiddleware(ROLES.Manager, ROLES.Admin),
+  validate([{ schema: idParamSchema, source: "params" }]),
+  getPOByIdController,
+);
+
+router.put(
+  "/purchaseorder-accept/:id",
+  authMiddleware,
+  rbacMiddleware(ROLES.Manager, ROLES.Admin),
+  validate([{ schema: idParamSchema, source: "params" }]),
+  acceptPurchaseOrderController,
+);
+
+router.put(
+  "/purchaseorder-refuse/:id",
+  authMiddleware,
+  rbacMiddleware(ROLES.Manager, ROLES.Admin),
+  validate([{ schema: idParamSchema, source: "params" }]),
+  rejectPurchaseOrderController,
+);
+
 export default router;
+

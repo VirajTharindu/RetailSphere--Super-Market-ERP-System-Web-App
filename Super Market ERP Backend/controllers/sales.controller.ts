@@ -14,7 +14,8 @@ export function healthCheck(req: any, res: any) {
 // Create Sale
 export async function createSaleController(req: any, res: any) {
   try {
-    const result = await SalesService.processSale(req.body, req.user); // ← pass logged-in user);
+    // Use req.validated (Zod-parsed, with defaults applied) instead of raw req.body
+    const result = await SalesService.processSale(req.validated ?? req.body, req.user);
 
     const { sale, reorderResults } = result;
 
@@ -80,8 +81,8 @@ export async function getSaleByIdController(req: any, res: any) {
 // Update Sale (Header / Metadata ONLY)
 export async function updateSaleController(req: any, res: any) {
   try {
-    const { id } = req.params;
-    const updateData = req.body;
+    const { id } = (req.validated ?? req.params) as any;
+    const updateData = req.validated ?? req.body;
 
     const sale = await SalesService.updateSale(id, updateData);
 

@@ -1,4 +1,5 @@
 import sequelize from "../config/database.js";
+import { Op } from "sequelize";
 import db from "../models/index.js";
 import { issueStockByProduct } from "./inventory.service.js";
 import generateInvoiceNo from "../utils/generateInvoiceNo.js";
@@ -12,8 +13,15 @@ import generateInvoiceNo from "../utils/generateInvoiceNo.js";
 // Helper function to get available stock
 async function getTotalAvailableStock(productId: any, options: any = {}) {
   const { StockBatch } = db as any;
+  const today = new Date();
   const batches = await (StockBatch as any).findAll({
-    where: { ProductID: productId },
+    where: {
+      ProductID: productId,
+      [Op.or]: [
+        { ExpiryDate: null },
+        { ExpiryDate: { [Op.gt]: today } },
+      ],
+    },
     attributes: [
       [sequelize.fn("SUM", sequelize.col("QuantityOnHand")), "total"],
     ],
@@ -53,10 +61,12 @@ export async function processSale(
 
     if (!allowedStatus.includes(status)) throw new Error("Invalid status");
 
-    const customer = await (Customer as any).findByPk(customerId, { transaction: t });
-    if (!customer) throw new Error("Customer not found");
-
-    let customerIDForSales = (customer as any).CustomerID;
+    let customerIDForSales: number | null = null;
+    if (customerId) {
+      const customer = await (Customer as any).findByPk(customerId, { transaction: t });
+      if (!customer) throw new Error("Customer not found");
+      customerIDForSales = (customer as any).CustomerID;
+    }
 
     const sale = await (Sale as any).create(
       {

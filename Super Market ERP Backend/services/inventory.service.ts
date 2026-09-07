@@ -125,6 +125,34 @@ async function createBatch(data: any) {
 
     return batch;
   });
+} 
+
+// ---------- Direct Stock Batch Creation (bypass PO) ----------
+/**
+ * Create a stock batch directly without PO validation.
+ * Requires a valid ProductID and QuantityOnHand.
+ */
+async function createDirectBatch(data: any) {
+  const { ProductID, QuantityOnHand, CostPrice, ExpiryDate, SupplierID } = data;
+  if (!ProductID) throw new Error('ProductID is required');
+  if (QuantityOnHand == null || QuantityOnHand <= 0) throw new Error('QuantityOnHand must be greater than 0');
+
+  // Verify product exists
+  const product = await (Product as any).findByPk(ProductID);
+  if (!product) throw new Error('Product not found');
+
+  // Create batch directly
+  const batch = await (StockBatch as any).create({
+    ProductID,
+    QuantityOnHand,
+    CostPrice: CostPrice ?? null,
+    ExpiryDate: ExpiryDate ?? null,
+    SupplierID: SupplierID ?? null,
+  });
+
+  // Trigger reorder check after creation
+  await checkReorder(ProductID);
+  return batch;
 }
 
 /**
@@ -214,7 +242,11 @@ async function checkReorder(productId: any, transaction: any = null) {
   const totalStock = await (StockBatch as any).sum("QuantityOnHand", {
     where: {
       ProductID: productId,
-      ExpiryDate: { [Op.gt]: today },
+      // Include non-expiring (NULL) batches AND batches that haven't expired yet
+      [Op.or]: [
+        { ExpiryDate: null },
+        { ExpiryDate: { [Op.gt]: today } },
+      ],
     },
     transaction,
   }) || 0;
@@ -348,8 +380,12 @@ export async function issueStockByProduct({
 
     for (const batch of batches) {
       if (remaining <= 0) break;
-      const daysLeft = daysToExpiry((batch as any).ExpiryDate);
-      if (daysLeft <= 0) continue;
+      // Treat NULL ExpiryDate as "never expires" — only skip if an actual date is set AND it's past
+      const expiryDate = (batch as any).ExpiryDate;
+      if (expiryDate) {
+        const daysLeft = daysToExpiry(expiryDate);
+        if (daysLeft <= 0) continue;
+      }
 
       const deduct = Math.min((batch as any).QuantityOnHand, remaining);
       if (deduct > 0) {
@@ -383,6 +419,7 @@ export default {
   getExpiringBatches,
   getSellableBatches,
   createBatch,
+  createDirectBatch,
   updateBatch,
   deleteBatch,
   reduceStock,
