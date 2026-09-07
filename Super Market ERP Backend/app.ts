@@ -70,7 +70,7 @@ sequelize
   .catch((err: any) => console.error("❌ DB Connection Failed:", err));
 
 sequelize
-  .sync({ force: false }) // Automatically updates schema to match models
+  .sync() // Sync models without altering existing indexes
   .then(() => {
     console.log("✅ Database synced with Sequelize models");
     app.listen(process.env.PORT || 3000, () =>

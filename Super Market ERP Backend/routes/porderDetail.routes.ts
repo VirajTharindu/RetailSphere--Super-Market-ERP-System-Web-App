@@ -5,6 +5,8 @@ import {
   getPODetailController,
   updatePODetailController,
   listPODetailsController,
+  acceptPODetailController,
+  refusePODetailController,
 } from "../controllers/porderDetail.controller.js";
 
 import authMiddleware from "../middleware/auth.js";
@@ -47,16 +49,35 @@ router.get(
   getPODetailController,
 );
 
+// Accept PO Detail - Manager & Admin Only
+router.put(
+  "/podetails-accept/:id",
+  authMiddleware,
+  rbacMiddleware(ROLES.Manager, ROLES.Admin),
+  validate([{ schema: idParamSchema, source: "params" }]),
+  acceptPODetailController,
+);
+
+// Refuse PO Detail - Manager & Admin Only
+router.put(
+  "/podetails-refuse/:id",
+  authMiddleware,
+  rbacMiddleware(ROLES.Manager, ROLES.Admin),
+  validate([{ schema: idParamSchema, source: "params" }]),
+  refusePODetailController,
+);
+
 // Update PO Detail - Manager & Admin Only
 router.put(
-  "/podetails-update/:id", // id is PO_ID now
+  "/podetails-update/:id",
   authMiddleware,
   rbacMiddleware(ROLES.Manager, ROLES.Admin),
   validate([
     { schema: updatePODetailSchema, source: "body" },
-    { schema: idParamSchema, source: "params" }, // optional param validation placeholder
+    { schema: idParamSchema, source: "params" },
   ]),
   updatePODetailController,
 );
 
 export default router;
+

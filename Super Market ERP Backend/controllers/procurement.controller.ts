@@ -4,6 +4,10 @@ import {
   getAllSuppliers,
   updateSupplier,
   deleteSupplier,
+  getAllPOs,
+  getPOById,
+  acceptPurchaseOrder,
+  rejectPurchaseOrder,
 } from "../services/procurement.service.js";
 
 /**
@@ -152,3 +156,61 @@ export async function deleteSupplierController(req: any, res: any) {
     });
   }
 }
+
+/**
+ * ==========================================
+ * PURCHASE ORDER CONTROLLER METHODS
+ * ==========================================
+ */
+
+export async function getAllPOsController(req: any, res: any) {
+  try {
+    const pos = await getAllPOs();
+    res.status(200).json({
+      success: true,
+      purchaseOrders: pos,
+    });
+  } catch (error: any) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+}
+
+export async function getPOByIdController(req: any, res: any) {
+  try {
+    const { id } = req.params;
+    const po = await getPOById(id);
+    if (!po) return res.status(404).json({ success: false, message: "Purchase Order not found" });
+    res.status(200).json({ success: true, purchaseOrder: po });
+  } catch (error: any) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+}
+
+export async function acceptPurchaseOrderController(req: any, res: any) {
+  try {
+    const { id } = req.params;
+    const po = await acceptPurchaseOrder(id);
+    res.status(200).json({
+      success: true,
+      message: `Purchase Order #${id} accepted successfully`,
+      purchaseOrder: po,
+    });
+  } catch (error: any) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+}
+
+export async function rejectPurchaseOrderController(req: any, res: any) {
+  try {
+    const { id } = req.params;
+    const po = await rejectPurchaseOrder(id);
+    res.status(200).json({
+      success: true,
+      message: `Purchase Order #${id} refused/cancelled`,
+      purchaseOrder: po,
+    });
+  } catch (error: any) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+}
+

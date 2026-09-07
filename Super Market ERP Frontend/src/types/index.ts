@@ -128,6 +128,16 @@ export interface POrderDetail {
   Supplier?: Supplier
 }
 
+export interface PurchaseOrder {
+  PO_ID: number
+  OrderDate?: string
+  Status: PODetailStatus
+  SupplierID?: number
+  Supplier?: Supplier
+  POrderDetails?: POrderDetail[]
+}
+
+
 /** API payloads */
 export interface CreateSalePayload {
   customerId?: number
